@@ -44,11 +44,11 @@ int main()
 
     while (!feof(arquivo) && quantidadeParesOrdenados < MAX_TAMANHO)
     {
-        fscanf(arquivo,"%d",&paresOrdenados[quantidadeParesOrdenados].x);
-        fscanf(arquivo,"%d",&paresOrdenados[quantidadeParesOrdenados].y);
+        fscanf(arquivo, "%d", &paresOrdenados[quantidadeParesOrdenados].x);
+        fscanf(arquivo, "%d", &paresOrdenados[quantidadeParesOrdenados].y);
         quantidadeParesOrdenados++;
     }
-
+    fclose(arquivo);
     //Montagem da matriz de adjacencias
     for (int i = 0; i < quantidadeDeElementos; i++)
     {
@@ -72,5 +72,98 @@ int main()
         }
         printf("\n");
     }
+
+    printf("Propriedades\n");
+
+    //verificando a relação reflexiva
+    printf("1. Reflexiva: ");
+    int cont = 0;
+    for (int i = 0; i < quantidadeDeElementos; i++)
+    {
+        if (matrizAdjacencias[i][i] == 1)
+        {
+            cont++;
+        }
+    }
+    if (cont == quantidadeDeElementos)
+    {
+        printf("V\n");
+    }
+    else
+    {
+        printf("F\n");
+        printf("  ");
+        for (int i = 0; i < quantidadeDeElementos; i++)
+        {
+            if (matrizAdjacencias[i][i] != 1)
+            {
+                printf("(%d,%d)", elementos[i], elementos[i]);
+            }
+        }
+        printf("\n");
+    }
+
+    //verificando a relação irreflexiva
+    printf("2. Irreflexiva: ");
+    cont = 0;
+    for (int i = 0; i < quantidadeDeElementos; i++)
+    {
+        if (matrizAdjacencias[i][i] == 0)
+        {
+            cont++;
+        }
+    }
+    if (cont == quantidadeDeElementos)
+    {
+        printf("V\n");
+    }
+    else
+    {
+        printf("F\n");
+        printf("   ");
+        for (int i = 0; i < quantidadeDeElementos; i++)
+        {
+            if (matrizAdjacencias[i][i] != 0)
+            {
+                printf("(%d,%d)", elementos[i], elementos[i]);
+            }
+        }
+        printf("\n");
+    }
+
+    //verificando a relação simetrica
+
+    // printf("2. Simétrica: ");
+    // ParOrdenado faltaParaSerSimetrica[quantidadeParesOrdenados];
+    // int EhSimetrica = 1;
+    // int numeroDeFaltaParaSerSimetrica = 0;
+    // for (int i = 0; i < quantidadeDeElementos; i++)
+    // {
+    //     for (int j = 0; j < quantidadeDeElementos; j++)
+    //     {
+    //         if (matrizAdjacencias[i][j] != matrizAdjacencias[j][i])
+    //         {
+    //             EhSimetrica = 0;
+    //             faltaParaSerSimetrica[numeroDeFaltaParaSerSimetrica].x = elementos[i];
+    //             faltaParaSerSimetrica[numeroDeFaltaParaSerSimetrica].y = elementos[j];
+    //             numeroDeFaltaParaSerSimetrica++;
+    //         }
+    //     }
+    // }
+    // if (EhSimetrica)
+    // {
+    //     printf("V\n");
+    // }
+    // else
+    // {
+    //     printf("F\n");
+    //     printf("   ");
+    //     for (int i = 0; i < numeroDeFaltaParaSerSimetrica; i++)
+    //     {
+    //             printf("(%d,%d)", faltaParaSerSimetrica[i].x, faltaParaSerSimetrica[i].y);
+    //     }
+    //     printf("\n");
+    // }
+
     return 0;
 }
