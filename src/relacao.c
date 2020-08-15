@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#define MAX_TAMANHO 10000
+#define MAX_TAMANHO 1000
 
 typedef struct
 {
@@ -8,47 +8,69 @@ typedef struct
     int y;
 } ParOrdenado;
 
+int encontraPosicaoElemento(int elementos[], int elemento, int quantidadeDeElementos)
+{
+    for (int i = 0; i < quantidadeDeElementos; i++)
+    {
+        if (elemento == elementos[i])
+        {
+            return i;
+        }
+    }
+}
+
 int main()
 {
+    //Entrada de dados
     FILE *arquivo;
-    arquivo = fopen("entrada.txt", "r");
+    if ((arquivo = fopen("entrada.txt", "r")) == NULL)
+    {
+        printf("Arquivo não encontrado, verifique se o arquivo entrada.txt está na pasta");
+        exit(1);
+    }
 
-    int quantidadeDeElementos;
-    int *elementos;
     int quantidadeParesOrdenados = 0;
     ParOrdenado paresOrdenados[MAX_TAMANHO];
 
-    if (arquivo != NULL)
+    int quantidadeDeElementos;
+    fscanf(arquivo, "%d", &quantidadeDeElementos);
+    int matrizAdjacencias[quantidadeDeElementos][quantidadeDeElementos];
+
+    int elementos[quantidadeDeElementos];
+    for (int i = 0; i < quantidadeDeElementos; i++)
     {
-        char linha[MAX_TAMANHO];
+        fscanf(arquivo, "%d", &elementos[i]);
+    }
 
-        fscanf(arquivo, "%d", &quantidadeDeElementos);
-        elementos = (int *)malloc(quantidadeDeElementos * sizeof(int));
-        printf("Quantidade de elementos: %d\n", quantidadeDeElementos); //retirar
+    while (!feof(arquivo) && quantidadeParesOrdenados < MAX_TAMANHO)
+    {
+        fscanf(arquivo,"%d",&paresOrdenados[quantidadeParesOrdenados].x);
+        fscanf(arquivo,"%d",&paresOrdenados[quantidadeParesOrdenados].y);
+        quantidadeParesOrdenados++;
+    }
 
-        for (int i = 0; i < quantidadeDeElementos; i++)
+    //Montagem da matriz de adjacencias
+    for (int i = 0; i < quantidadeDeElementos; i++)
+    {
+        for (int j = 0; j < quantidadeDeElementos; j++)
         {
-            fscanf(arquivo, "%d", &elementos[i]);
-            printf("Elemento %d: %d\n", i, elementos[i]);
-        };
-
-        while (!feof(arquivo) && quantidadeParesOrdenados<MAX_TAMANHO)
-        {
-            int cordenadaX,cordenadaY;
-            fscanf(arquivo, "%d", &cordenadaX);
-            fscanf(arquivo, "%d", &cordenadaY);
-            paresOrdenados[quantidadeParesOrdenados].x = cordenadaX;
-            paresOrdenados[quantidadeParesOrdenados].y = cordenadaY;
-            printf("Cordenada %d x:%d\n",quantidadeParesOrdenados,paresOrdenados[quantidadeParesOrdenados].x); //retirar
-            printf("Cordenada %d y:%d\n\n",quantidadeParesOrdenados,paresOrdenados[quantidadeParesOrdenados].y); //retirar
-            quantidadeParesOrdenados++;
+            matrizAdjacencias[i][j] = 0;
         }
-        fclose(arquivo);
-        printf("quantidade: %d",quantidadeParesOrdenados); //retirar
     }
-    else
+    for (int i = 0; i < quantidadeParesOrdenados; i++)
     {
-        printf("Erro, não foi possível abrir o arquivo"); 
-        return 0;
+        int posicaoX = encontraPosicaoElemento(elementos, paresOrdenados[i].x, quantidadeDeElementos);
+        int posicaoY = encontraPosicaoElemento(elementos, paresOrdenados[i].y, quantidadeDeElementos);
+        matrizAdjacencias[posicaoX][posicaoY] = 1;
     }
+
+    for (int i = 0; i < quantidadeDeElementos; i++)
+    {
+        for (int j = 0; j < quantidadeDeElementos; j++)
+        {
+            printf("%d  ", matrizAdjacencias[i][j]);
+        }
+        printf("\n");
+    }
+    return 0;
 }
