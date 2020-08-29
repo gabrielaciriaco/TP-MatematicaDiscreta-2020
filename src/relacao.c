@@ -64,20 +64,12 @@ int main()
         matrizAdjacencias[posicaoX][posicaoY] = 1;
     }
 
-    for (int i = 0; i < quantidadeDeElementos; i++)
-    {
-        for (int j = 0; j < quantidadeDeElementos; j++)
-        {
-            printf("%d  ", matrizAdjacencias[i][j]);
-        }
-        printf("\n");
-    }
-
     printf("Propriedades\n");
 
     //verificando a relação reflexiva
     printf("1. Reflexiva: ");
     int cont = 0;
+    int EhReflexiva = 1;
     for (int i = 0; i < quantidadeDeElementos; i++)
     {
         if (matrizAdjacencias[i][i] == 1)
@@ -91,6 +83,7 @@ int main()
     }
     else
     {
+        EhReflexiva = 0;
         printf("F\n");
         printf("  ");
         for (int i = 0; i < quantidadeDeElementos; i++)
@@ -105,6 +98,7 @@ int main()
 
     //verificando a relação irreflexiva
     printf("2. Irreflexiva: ");
+    int EhIrreflexiva = 1;
     cont = 0;
     for (int i = 0; i < quantidadeDeElementos; i++)
     {
@@ -119,6 +113,7 @@ int main()
     }
     else
     {
+        EhIrreflexiva = 0;
         printf("F\n");
         printf("   ");
         for (int i = 0; i < quantidadeDeElementos; i++)
@@ -145,8 +140,8 @@ int main()
                 if (matrizAdjacencias[i][j] != matrizAdjacencias[j][i])
                 {
                     EhSimetrica = 0;
-                    faltaParaSerSimetrica[numeroDeFaltaParaSerSimetrica].x = elementos[i];
-                    faltaParaSerSimetrica[numeroDeFaltaParaSerSimetrica].y = elementos[j];
+                    faltaParaSerSimetrica[numeroDeFaltaParaSerSimetrica].x = elementos[j];
+                    faltaParaSerSimetrica[numeroDeFaltaParaSerSimetrica].y = elementos[i];
                     numeroDeFaltaParaSerSimetrica++;
                 }
             }
@@ -251,5 +246,87 @@ int main()
         printf("\n");
     }
 
+    //verificando a relacao transitiva
+    printf("2. Transitiva: ");
+    ParOrdenado paresNaoTransitivos[quantidadeParesOrdenados];
+    int EhTransitiva = 1;
+    int numeroDeParesNaoTransitivos = 0;
+    jaEstaNoVetor = 0;
+    for (int i = 0; i < quantidadeDeElementos; i++)
+    {
+        for (int j = 0; j < quantidadeDeElementos; j++)
+        {
+            for (int k = 0; k < quantidadeDeElementos; k++)
+            {
+                if (matrizAdjacencias[i][j] == 1 && matrizAdjacencias[j][k] == 1)
+                {
+                    if (matrizAdjacencias[i][k] != 1)
+                    {
+                        for (int x = 0; x < numeroDeParesNaoTransitivos; x++)
+                        {
+                            if (paresNaoTransitivos[x].x == elementos[i] && paresNaoTransitivos[x].y == elementos[k])
+                            {
+                                jaEstaNoVetor = 1;
+                            }
+                        }
+                        if (!jaEstaNoVetor)
+                        {
+                            EhTransitiva = 0;
+                            paresNaoTransitivos[numeroDeParesNaoTransitivos].x = elementos[i];
+                            paresNaoTransitivos[numeroDeParesNaoTransitivos].y = elementos[k];
+                            numeroDeParesNaoTransitivos++;
+                        }
+                        jaEstaNoVetor = 0;
+                    }
+                }
+            }
+        }
+    }
+    if (EhTransitiva == 1)
+    {
+        printf("V\n");
+    }
+    else
+    {
+        printf("F\n");
+        printf("   ");
+        for (int i = 0; i < numeroDeParesNaoTransitivos; i++)
+        {
+            printf("(%d,%d); ", paresNaoTransitivos[i].x, paresNaoTransitivos[i].y);
+        }
+        printf("\n");
+    }
+
+    printf("\n");
+    printf("Relação de equivalência: ");
+    if (EhReflexiva && EhSimetrica && EhTransitiva)
+    {
+        printf("V\n");
+    }
+    else
+    {
+        printf("F\n");
+    }
+
+    printf("Relação de ordem parcial: ");
+    if (EhReflexiva && EhAntiSimetrica && EhTransitiva)
+    {
+        printf("V\n");
+    }
+    else
+    {
+        printf("F\n");
+    }
+
+    printf("\n");
+    printf("Fecho transitivo da relação:");
+    for (int i = 0; i < quantidadeParesOrdenados; i++)
+    {
+        printf("(%d,%d); ", paresOrdenados[i].x, paresOrdenados[i].y);
+    }
+    for (int i = 0; i < numeroDeParesNaoTransitivos; i++)
+    {
+        printf("(%d,%d); ", paresNaoTransitivos[i].x, paresNaoTransitivos[i].y);
+    }
     return 0;
 }
