@@ -1,3 +1,9 @@
+/* GABRIELA DA SILVA CIRÍACP - 2019054595
+// COMPLEXIDADE O(n^4)
+// FEITO E TESTADO NO UBUNTU 18.0.4 LTS gcc 7.5.0
+// COMANDO PARA EXECUTAR NO UBUNTU: g++ relacao.c -o relacao && ./relacao
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 #define MAX_TAMANHO 1000
