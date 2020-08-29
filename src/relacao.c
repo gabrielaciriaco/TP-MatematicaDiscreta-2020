@@ -127,10 +127,10 @@ int main()
     }
 
     //verificando a relação simetrica
-    printf("2. Simétrica: ");
-    ParOrdenado faltaParaSerSimetrica[quantidadeParesOrdenados];
+    printf("3. Simétrica: ");
+    ParOrdenado paresNaoSimetricos[quantidadeParesOrdenados];
     int EhSimetrica = 1;
-    int numeroDeFaltaParaSerSimetrica = 0;
+    int numeroParesNaoSimetricos = 0;
     for (int i = 0; i < quantidadeDeElementos; i++)
     {
         for (int j = 0; j < quantidadeDeElementos; j++)
@@ -140,9 +140,9 @@ int main()
                 if (matrizAdjacencias[i][j] != matrizAdjacencias[j][i])
                 {
                     EhSimetrica = 0;
-                    faltaParaSerSimetrica[numeroDeFaltaParaSerSimetrica].x = elementos[j];
-                    faltaParaSerSimetrica[numeroDeFaltaParaSerSimetrica].y = elementos[i];
-                    numeroDeFaltaParaSerSimetrica++;
+                    paresNaoSimetricos[numeroParesNaoSimetricos].x = elementos[j];
+                    paresNaoSimetricos[numeroParesNaoSimetricos].y = elementos[i];
+                    numeroParesNaoSimetricos++;
                 }
             }
         }
@@ -155,18 +155,18 @@ int main()
     {
         printf("F\n");
         printf("   ");
-        for (int i = 0; i < numeroDeFaltaParaSerSimetrica; i++)
+        for (int i = 0; i < numeroParesNaoSimetricos; i++)
         {
-            printf("(%d,%d); ", faltaParaSerSimetrica[i].x, faltaParaSerSimetrica[i].y);
+            printf("(%d,%d); ", paresNaoSimetricos[i].x, paresNaoSimetricos[i].y);
         }
         printf("\n");
     }
 
     //verificando a relacao anti simetrica
-    printf("2. Anti-simétrica: ");
-    ParOrdenado faltaParaSerAntiSimetrica[quantidadeParesOrdenados];
+    printf("4. Anti-simétrica: ");
+    ParOrdenado paresNaoAntiSimetricos[quantidadeParesOrdenados];
     int EhAntiSimetrica = 1;
-    int numeroDeFaltaParaSerAntiSimetrica = 0;
+    int numeroParesNaoAntiSimetricos = 0;
     int jaEstaNoVetor = 0;
     for (int i = 0; i < quantidadeDeElementos; i++)
     {
@@ -176,9 +176,9 @@ int main()
             {
                 if (matrizAdjacencias[i][j] == matrizAdjacencias[j][i] && i != j)
                 {
-                    for (int x = 0; x < numeroDeFaltaParaSerAntiSimetrica; x++)
+                    for (int x = 0; x < numeroParesNaoAntiSimetricos; x++)
                     {
-                        if (faltaParaSerAntiSimetrica[x].y == elementos[i] && faltaParaSerAntiSimetrica[x].x == elementos[j])
+                        if (paresNaoAntiSimetricos[x].y == elementos[i] && paresNaoAntiSimetricos[x].x == elementos[j])
                         {
                             jaEstaNoVetor = 1;
                         }
@@ -186,9 +186,9 @@ int main()
                     if (!jaEstaNoVetor)
                     {
                         EhAntiSimetrica = 0;
-                        faltaParaSerAntiSimetrica[numeroDeFaltaParaSerAntiSimetrica].x = elementos[i];
-                        faltaParaSerAntiSimetrica[numeroDeFaltaParaSerAntiSimetrica].y = elementos[j];
-                        numeroDeFaltaParaSerAntiSimetrica++;
+                        paresNaoAntiSimetricos[numeroParesNaoAntiSimetricos].x = elementos[i];
+                        paresNaoAntiSimetricos[numeroParesNaoAntiSimetricos].y = elementos[j];
+                        numeroParesNaoAntiSimetricos++;
                     }
                     jaEstaNoVetor = 0;
                 }
@@ -203,18 +203,18 @@ int main()
     {
         printf("F\n");
         printf("   ");
-        for (int i = 0; i < numeroDeFaltaParaSerAntiSimetrica; i++)
+        for (int i = 0; i < numeroParesNaoAntiSimetricos; i++)
         {
-            printf("(%d,%d) e (%d,%d); ", faltaParaSerAntiSimetrica[i].x, faltaParaSerAntiSimetrica[i].y, faltaParaSerAntiSimetrica[i].y, faltaParaSerAntiSimetrica[i].x);
+            printf("(%d,%d) e (%d,%d); ", paresNaoAntiSimetricos[i].x, paresNaoAntiSimetricos[i].y, paresNaoAntiSimetricos[i].y, paresNaoAntiSimetricos[i].x);
         }
         printf("\n");
     }
 
     //verificando a relacao assimética
-    printf("2. Assimétrica: ");
-    ParOrdenado faltaParaSerAssimetrica[quantidadeParesOrdenados];
+    printf("5. Assimétrica: ");
+    ParOrdenado paresNaoAssimetricos[quantidadeParesOrdenados];
     int EhAssimetrica = 1;
-    int numeroDeFaltaParaSerAssimetrica = 0;
+    int numeroParesNaoAssimetricos = 0;
     for (int i = 0; i < quantidadeDeElementos; i++)
     {
         for (int j = 0; j < quantidadeDeElementos; j++)
@@ -224,9 +224,9 @@ int main()
                 if (matrizAdjacencias[i][j] == matrizAdjacencias[j][i])
                 {
                     EhAssimetrica = 0;
-                    faltaParaSerAssimetrica[numeroDeFaltaParaSerAssimetrica].x = elementos[i];
-                    faltaParaSerAssimetrica[numeroDeFaltaParaSerAssimetrica].y = elementos[j];
-                    numeroDeFaltaParaSerAssimetrica++;
+                    paresNaoAssimetricos[numeroParesNaoAssimetricos].x = elementos[i];
+                    paresNaoAssimetricos[numeroParesNaoAssimetricos].y = elementos[j];
+                    numeroParesNaoAssimetricos++;
                 }
             }
         }
@@ -239,15 +239,15 @@ int main()
     {
         printf("F\n");
         printf("   ");
-        for (int i = 0; i < numeroDeFaltaParaSerAssimetrica; i++)
+        for (int i = 0; i < numeroParesNaoAssimetricos; i++)
         {
-            printf("(%d,%d); ", faltaParaSerAssimetrica[i].x, faltaParaSerAssimetrica[i].y);
+            printf("(%d,%d); ", paresNaoAssimetricos[i].x, paresNaoAssimetricos[i].y);
         }
         printf("\n");
     }
 
     //verificando a relacao transitiva
-    printf("2. Transitiva: ");
+    printf("6. Transitiva: ");
     ParOrdenado paresNaoTransitivos[quantidadeParesOrdenados];
     int EhTransitiva = 1;
     int numeroDeParesNaoTransitivos = 0;
