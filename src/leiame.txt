@@ -1,0 +1,28 @@
+Instruções para a execução do algoritmo
+
+O código foi desenvolvido em C e testado no Ubuntu 18.0.4 LTS, usando o gcc 7.5.0
+Este código não foi testado no windows e seu funcionamento não é garantido com o uso do Mingw.
+Este código não foi testado em nenhuma IDE como code:Blocks ou devC++ portanto seu funcionamento não é garantido 
+utilizando essas IDE.
+
+Para executar o algorítmo com sucesso, insira as relações no arquivo "entrada.txt", este arquivo não não poderá ter 
+mais do que 1000 linhas, além disso, o último caracter do arquivo NÃO PODERÁ SER um espaço ou um /n, isso gera problemas
+no código e sua estabilidade não é garantida nesse caso.
+O arquivo de entrada deve obedecer o seguinte padrão:
+
+3 20 21 22
+20 21
+20 22
+22 22
+22 20
+
+sendo o primeiro número a quantidade de vértices, os números seguintes os vértices do conjunto e abaixo os pares ordenados.
+Não insira a entrada incorreta e também não coloque nas relações números que não foram listados nos vértices do conjunto,
+o código não cobre esses casos portanto não é garantido seu funcionamento.
+
+Para executar no Ubuntu o programa navegue até a pasta onde o código fonte esta, em seguida execute o seguinte comando:
+    g++ relacao.c -o relacao
+então, altere o arquivo "entrada.txt" com a entrada desejada seguindo os padrões descritos acima, salve e execute o comando:
+    ./relacao
+
+
