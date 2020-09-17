@@ -1,4 +1,4 @@
-/* GABRIELA DA SILVA CIRÍACP - 2019054595
+/* GABRIELA DA SILVA CIRÍACO - 2019054595
 // COMPLEXIDADE O(n^4)
 // FEITO E TESTADO NO UBUNTU 18.0.4 LTS gcc 7.5.0
 // COMANDO PARA EXECUTAR NO UBUNTU: g++ relacao.c -o relacao && ./relacao
@@ -69,11 +69,8 @@ int main()
         int posicaoY = encontraPosicaoElemento(elementos, paresOrdenados[i].y, quantidadeDeElementos);
         matrizAdjacencias[posicaoX][posicaoY] = 1;
     }
-
-    printf("Propriedades\n");
-
     //verificando a relação reflexiva
-    printf("1. Reflexiva: ");
+    printf("Reflexiva: ");
     int cont = 0;
     int EhReflexiva = 1;
     for (int i = 0; i < quantidadeDeElementos; i++)
@@ -91,7 +88,6 @@ int main()
     {
         EhReflexiva = 0;
         printf("F\n");
-        printf("  ");
         for (int i = 0; i < quantidadeDeElementos; i++)
         {
             if (matrizAdjacencias[i][i] != 1)
@@ -103,7 +99,7 @@ int main()
     }
 
     //verificando a relação irreflexiva
-    printf("2. Irreflexiva: ");
+    printf("Irreflexiva: ");
     int EhIrreflexiva = 1;
     cont = 0;
     for (int i = 0; i < quantidadeDeElementos; i++)
@@ -121,7 +117,6 @@ int main()
     {
         EhIrreflexiva = 0;
         printf("F\n");
-        printf("   ");
         for (int i = 0; i < quantidadeDeElementos; i++)
         {
             if (matrizAdjacencias[i][i] != 0)
@@ -133,7 +128,7 @@ int main()
     }
 
     //verificando a relação simetrica
-    printf("3. Simétrica: ");
+    printf("Simétrica: ");
     ParOrdenado paresNaoSimetricos[quantidadeParesOrdenados];
     int EhSimetrica = 1;
     int numeroParesNaoSimetricos = 0;
@@ -160,7 +155,6 @@ int main()
     else
     {
         printf("F\n");
-        printf("   ");
         for (int i = 0; i < numeroParesNaoSimetricos; i++)
         {
             printf("(%d,%d); ", paresNaoSimetricos[i].x, paresNaoSimetricos[i].y);
@@ -169,7 +163,7 @@ int main()
     }
 
     //verificando a relacao anti simetrica
-    printf("4. Anti-simétrica: ");
+    printf("Anti-simétrica: ");
     ParOrdenado paresNaoAntiSimetricos[quantidadeParesOrdenados];
     int EhAntiSimetrica = 1;
     int numeroParesNaoAntiSimetricos = 0;
@@ -208,19 +202,16 @@ int main()
     else
     {
         printf("F\n");
-        printf("   ");
         for (int i = 0; i < numeroParesNaoAntiSimetricos; i++)
         {
-            printf("(%d,%d) e (%d,%d); ", paresNaoAntiSimetricos[i].x, paresNaoAntiSimetricos[i].y, paresNaoAntiSimetricos[i].y, paresNaoAntiSimetricos[i].x);
+            printf("(%d,%d); (%d,%d); ", paresNaoAntiSimetricos[i].x, paresNaoAntiSimetricos[i].y, paresNaoAntiSimetricos[i].y, paresNaoAntiSimetricos[i].x);
         }
         printf("\n");
     }
 
     //verificando a relacao assimética
-    printf("5. Assimétrica: ");
-    ParOrdenado paresNaoAssimetricos[quantidadeParesOrdenados];
+    printf("Assimétrica: ");
     int EhAssimetrica = 1;
-    int numeroParesNaoAssimetricos = 0;
     for (int i = 0; i < quantidadeDeElementos; i++)
     {
         for (int j = 0; j < quantidadeDeElementos; j++)
@@ -230,9 +221,6 @@ int main()
                 if (matrizAdjacencias[i][j] == matrizAdjacencias[j][i])
                 {
                     EhAssimetrica = 0;
-                    paresNaoAssimetricos[numeroParesNaoAssimetricos].x = elementos[i];
-                    paresNaoAssimetricos[numeroParesNaoAssimetricos].y = elementos[j];
-                    numeroParesNaoAssimetricos++;
                 }
             }
         }
@@ -244,16 +232,10 @@ int main()
     else
     {
         printf("F\n");
-        printf("   ");
-        for (int i = 0; i < numeroParesNaoAssimetricos; i++)
-        {
-            printf("(%d,%d); ", paresNaoAssimetricos[i].x, paresNaoAssimetricos[i].y);
-        }
-        printf("\n");
     }
 
     //verificando a relacao transitiva
-    printf("6. Transitiva: ");
+    printf("Transitiva: ");
     ParOrdenado paresNaoTransitivos[quantidadeParesOrdenados];
     int EhTransitiva = 1;
     int numeroDeParesNaoTransitivos = 0;
@@ -295,7 +277,6 @@ int main()
     else
     {
         printf("F\n");
-        printf("   ");
         for (int i = 0; i < numeroDeParesNaoTransitivos; i++)
         {
             printf("(%d,%d); ", paresNaoTransitivos[i].x, paresNaoTransitivos[i].y);
@@ -325,7 +306,7 @@ int main()
     }
 
     printf("\n");
-    printf("Fecho transitivo da relação:");
+    printf("Fecho transitivo da relação: ");
     for (int i = 0; i < quantidadeParesOrdenados; i++)
     {
         printf("(%d,%d); ", paresOrdenados[i].x, paresOrdenados[i].y);
