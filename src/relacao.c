@@ -40,7 +40,6 @@ int main()
 
     int quantidadeDeElementos;
     fscanf(arquivo, "%d", &quantidadeDeElementos);
-    int matrizAdjacencias[quantidadeDeElementos][quantidadeDeElementos];
 
     int elementos[quantidadeDeElementos];
     for (int i = 0; i < quantidadeDeElementos; i++)
@@ -56,6 +55,8 @@ int main()
     }
     fclose(arquivo);
     //Montagem da matriz de adjacencias
+    
+    int matrizAdjacencias[quantidadeDeElementos][quantidadeDeElementos];
     for (int i = 0; i < quantidadeDeElementos; i++)
     {
         for (int j = 0; j < quantidadeDeElementos; j++)
