@@ -54,6 +54,8 @@ int main()
         quantidadeParesOrdenados++;
     }
     fclose(arquivo);
+    FILE *arquivoSaida;
+    arquivoSaida = fopen("saida.txt","w");
     //Montagem da matriz de adjacencias
     
     int matrizAdjacencias[quantidadeDeElementos][quantidadeDeElementos];
@@ -71,7 +73,7 @@ int main()
         matrizAdjacencias[posicaoX][posicaoY] = 1;
     }
     //verificando a relação reflexiva
-    printf("Reflexiva: ");
+    fprintf(arquivoSaida, "Reflexiva: ");
     int cont = 0;
     int EhReflexiva = 1;
     for (int i = 0; i < quantidadeDeElementos; i++)
@@ -83,24 +85,24 @@ int main()
     }
     if (cont == quantidadeDeElementos)
     {
-        printf("V\n");
+        fprintf(arquivoSaida, "V\n");
     }
     else
     {
         EhReflexiva = 0;
-        printf("F\n");
+        fprintf(arquivoSaida, "F\n");
         for (int i = 0; i < quantidadeDeElementos; i++)
         {
             if (matrizAdjacencias[i][i] != 1)
             {
-                printf("(%d,%d); ", elementos[i], elementos[i]);
+                fprintf(arquivoSaida, "(%d,%d); ", elementos[i], elementos[i]);
             }
         }
-        printf("\n");
+        fprintf(arquivoSaida, "\n");
     }
 
     //verificando a relação irreflexiva
-    printf("Irreflexiva: ");
+    fprintf(arquivoSaida, "Irreflexiva: ");
     int EhIrreflexiva = 1;
     cont = 0;
     for (int i = 0; i < quantidadeDeElementos; i++)
@@ -112,24 +114,24 @@ int main()
     }
     if (cont == quantidadeDeElementos)
     {
-        printf("V\n");
+        fprintf(arquivoSaida, "V\n");
     }
     else
     {
         EhIrreflexiva = 0;
-        printf("F\n");
+        fprintf(arquivoSaida, "F\n");
         for (int i = 0; i < quantidadeDeElementos; i++)
         {
             if (matrizAdjacencias[i][i] != 0)
             {
-                printf("(%d,%d); ", elementos[i], elementos[i]);
+                fprintf(arquivoSaida, "(%d,%d); ", elementos[i], elementos[i]);
             }
         }
-        printf("\n");
+        fprintf(arquivoSaida, "\n");
     }
 
     //verificando a relação simetrica
-    printf("Simétrica: ");
+    fprintf(arquivoSaida, "Simétrica: ");
     ParOrdenado paresNaoSimetricos[quantidadeParesOrdenados];
     int EhSimetrica = 1;
     int numeroParesNaoSimetricos = 0;
@@ -151,20 +153,20 @@ int main()
     }
     if (EhSimetrica == 1)
     {
-        printf("V\n");
+        fprintf(arquivoSaida, "V\n");
     }
     else
     {
-        printf("F\n");
+        fprintf(arquivoSaida, "F\n");
         for (int i = 0; i < numeroParesNaoSimetricos; i++)
         {
-            printf("(%d,%d); ", paresNaoSimetricos[i].x, paresNaoSimetricos[i].y);
+            fprintf(arquivoSaida, "(%d,%d); ", paresNaoSimetricos[i].x, paresNaoSimetricos[i].y);
         }
-        printf("\n");
+        fprintf(arquivoSaida, "\n");
     }
 
     //verificando a relacao anti simetrica
-    printf("Anti-simétrica: ");
+    fprintf(arquivoSaida, "Anti-simétrica: ");
     ParOrdenado paresNaoAntiSimetricos[quantidadeParesOrdenados];
     int EhAntiSimetrica = 1;
     int numeroParesNaoAntiSimetricos = 0;
@@ -198,20 +200,20 @@ int main()
     }
     if (EhAntiSimetrica == 1)
     {
-        printf("V\n");
+        fprintf(arquivoSaida, "V\n");
     }
     else
     {
-        printf("F\n");
+        fprintf(arquivoSaida, "F\n");
         for (int i = 0; i < numeroParesNaoAntiSimetricos; i++)
         {
-            printf("(%d,%d); (%d,%d); ", paresNaoAntiSimetricos[i].x, paresNaoAntiSimetricos[i].y, paresNaoAntiSimetricos[i].y, paresNaoAntiSimetricos[i].x);
+            fprintf(arquivoSaida, "(%d,%d); (%d,%d); ", paresNaoAntiSimetricos[i].x, paresNaoAntiSimetricos[i].y, paresNaoAntiSimetricos[i].y, paresNaoAntiSimetricos[i].x);
         }
-        printf("\n");
+        fprintf(arquivoSaida, "\n");
     }
 
     //verificando a relacao assimética
-    printf("Assimétrica: ");
+    fprintf(arquivoSaida, "Assimétrica: ");
     int EhAssimetrica = 1;
     for (int i = 0; i < quantidadeDeElementos; i++)
     {
@@ -228,15 +230,15 @@ int main()
     }
     if (EhAssimetrica == 1)
     {
-        printf("V\n");
+        fprintf(arquivoSaida, "V\n");
     }
     else
     {
-        printf("F\n");
+        fprintf(arquivoSaida, "F\n");
     }
 
     //verificando a relacao transitiva
-    printf("Transitiva: ");
+    fprintf(arquivoSaida, "Transitiva: ");
     ParOrdenado paresNaoTransitivos[quantidadeParesOrdenados];
     int EhTransitiva = 1;
     int numeroDeParesNaoTransitivos = 0;
@@ -273,48 +275,49 @@ int main()
     }
     if (EhTransitiva == 1)
     {
-        printf("V\n");
+        fprintf(arquivoSaida, "V\n");
     }
     else
     {
-        printf("F\n");
+        fprintf(arquivoSaida, "F\n");
         for (int i = 0; i < numeroDeParesNaoTransitivos; i++)
         {
-            printf("(%d,%d); ", paresNaoTransitivos[i].x, paresNaoTransitivos[i].y);
+            fprintf(arquivoSaida, "(%d,%d); ", paresNaoTransitivos[i].x, paresNaoTransitivos[i].y);
         }
-        printf("\n");
+        fprintf(arquivoSaida, "\n");
     }
 
-    printf("\n");
-    printf("Relação de equivalência: ");
+    fprintf(arquivoSaida, "\n");
+    fprintf(arquivoSaida, "Relação de equivalência: ");
     if (EhReflexiva && EhSimetrica && EhTransitiva)
     {
-        printf("V\n");
+        fprintf(arquivoSaida, "V\n");
     }
     else
     {
-        printf("F\n");
+        fprintf(arquivoSaida, "F\n");
     }
 
-    printf("Relação de ordem parcial: ");
+    fprintf(arquivoSaida, "Relação de ordem parcial: ");
     if (EhReflexiva && EhAntiSimetrica && EhTransitiva)
     {
-        printf("V\n");
+        fprintf(arquivoSaida, "V\n");
     }
     else
     {
-        printf("F\n");
+        fprintf(arquivoSaida, "F\n");
     }
 
-    printf("\n");
-    printf("Fecho transitivo da relação: ");
+    fprintf(arquivoSaida, "\n");
+    fprintf(arquivoSaida, "Fecho transitivo da relação: ");
     for (int i = 0; i < quantidadeParesOrdenados; i++)
     {
-        printf("(%d,%d); ", paresOrdenados[i].x, paresOrdenados[i].y);
+        fprintf(arquivoSaida, "(%d,%d); ", paresOrdenados[i].x, paresOrdenados[i].y);
     }
     for (int i = 0; i < numeroDeParesNaoTransitivos; i++)
     {
-        printf("(%d,%d); ", paresNaoTransitivos[i].x, paresNaoTransitivos[i].y);
+        fprintf(arquivoSaida, "(%d,%d); ", paresNaoTransitivos[i].x, paresNaoTransitivos[i].y);
     }
+    fclose(arquivoSaida);
     return 0;
 }
